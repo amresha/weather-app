@@ -1,3 +1,12 @@
+# 7-days Weather Forecast App
+
+API used to fetch weather forecast data [Weatherbit API](https://www.weatherbit.io/api/weather-forecast-16-day)
+Icons used for this project are available at [Icons](https://www.weatherbit.io/static/exports/icons.tar.gz)
+
+# Line Chart used to display 7-days Weather Forecast
+
+The most popular charting library has been used for this project [react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
