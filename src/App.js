@@ -8,8 +8,6 @@ import Graph from './component/Graph';
 import Header from './component/Header';
 require('dotenv').config()
 
-//const API_key='95aeb1b605d04a029bc140e58c651e9e';
-// api call api.weatherbit.io/v2.0/forecast/daily?city=London,UK
 
 const API_key = process.env.REACT_APP_ACCESS_KEY
 
@@ -31,11 +29,6 @@ error:false
 };
 
 }
-
-// calCelsius(temp){
-// let cell=Math.floor(temp - 273.15);
-// return cell;
-// }
 
 
 getLowTemp(ltemp){
@@ -80,7 +73,7 @@ getWeather =async(e)=>{
 
   if(city)
   {
-    const api_call =await fetch(`http://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${API_key}`)
+    const api_call =await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${API_key}`)
     const response = await api_call.json();
    // console.log(response.data);
   

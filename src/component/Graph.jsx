@@ -23,10 +23,7 @@ const Graph = props => {
             datasetHigh.push(props.temp_high[i]);
         }
 
-        // Chart.defaults.set('plugins.datalabels', {
-        //     display: true,
-        //     padding: {top: 30, left: 0, right: 0, bottom: 0}
-        //   });
+
 
      const data = {
         labels:labelstemp,

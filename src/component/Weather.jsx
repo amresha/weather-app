@@ -1,5 +1,4 @@
 import React from 'react';
-//import * as iconSrc from './icons';
 
 const Weather = props => {
     return (
