@@ -6,7 +6,7 @@ return(
     <div className="container">
     <form onSubmit={props.loadweather}>
     <div className="row">
-            <div className="col-sm-6 col-lg-8">
+            <div className="col-12 col-sm-6 col-md-8">
                 <input type="text" className="form-control" name="city" autoComplete="off" placeholder="Search City"/>
                 <button type="submit">Search</button>
 
