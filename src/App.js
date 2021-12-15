@@ -100,15 +100,15 @@ return(
   <div className="App">
   <Header />  
   <Form loadweather={this.getWeather} error={this.state.error} />
-      <div class="container">
-          <div class="row">
-              <div class="col-12 col-sm-6 col-md-8">{ 
+      <div className="container">
+          <div className="row">
+              <div className="col-12 col-sm-6 col-md-8">{ 
               this.state.city ? 
               <Graph city={this.state.city} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates}/>
               : null
               }
               </div>
-              <div class="col-6 col-md-4">{ 
+              <div className="col-6 col-md-4">{ 
               this.state.city ? 
               <Weather city={this.state.city} country={this.state.country} celsius={this.state.celsius} temp_low={this.state.temp_low} temp_high={this.state.temp_high} description={this.state.description} icon={this.state.icon} date={this.state.date} />
               : null

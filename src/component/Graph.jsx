@@ -4,8 +4,9 @@ import { Line } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
-const Graph = props => {
+const Graph  = props => {
     Chart.register(ChartDataLabels);
+
     
         const labelstemp = [];
         for (let i = 0; i < 7; i++) {    
@@ -22,8 +23,6 @@ const Graph = props => {
         for (let i = 0; i < 7; i++) {    
             datasetHigh.push(props.temp_high[i]);
         }
-
-
 
      const data = {
         labels:labelstemp,
@@ -57,7 +56,11 @@ const Graph = props => {
  
 const options = {
     responsive: true,
-   
+    onClick: (e, elements) => {
+        
+        console.log(elements);
+      },
+
     plugins:  {
            title: {
                 display: true,
@@ -101,7 +104,8 @@ const options = {
     return (
      <div className='container'>         
       <Line data={data} 
-            options={options}/>
+            options={options}
+      />
     
      </div>   
     );
