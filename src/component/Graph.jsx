@@ -5,6 +5,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 const Graph  = props => {
+
     Chart.register(ChartDataLabels);
 
     
@@ -56,6 +57,7 @@ const Graph  = props => {
  
 const options = {
     responsive: true,
+   
     onClick: (e, elements) => {
         
         console.log(elements);

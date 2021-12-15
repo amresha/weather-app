@@ -25,6 +25,7 @@ temp_high: undefined,
 temp_low: undefined,
 description: "",
 date: undefined,
+loading: false,
 error:false
 };
 
@@ -87,6 +88,7 @@ getWeather =async(e)=>{
      description:response.data[0].weather.description,
      icon:response.data[0].weather.icon,
      date:response.data[0].datetime,
+     loading: true,
      error:false
     });
   } else{
@@ -110,7 +112,7 @@ return(
               </div>
               <div className="col-6 col-md-4">{ 
               this.state.city ? 
-              <Weather city={this.state.city} country={this.state.country} celsius={this.state.celsius} temp_low={this.state.temp_low} temp_high={this.state.temp_high} description={this.state.description} icon={this.state.icon} date={this.state.date} />
+              <Weather city={this.state.city}  loading={this.state.loading} country={this.state.country} celsius={this.state.celsius} temp_low={this.state.temp_low} temp_high={this.state.temp_high} description={this.state.description} icon={this.state.icon} date={this.state.date} />
               : null
               }
             </div>
