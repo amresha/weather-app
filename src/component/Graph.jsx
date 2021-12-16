@@ -60,8 +60,9 @@ const options = {
    
     onClick: (e, elements) => {
         
-        console.log(elements);
-      },
+        console.log(elements[0]?.index);
+
+    },
 
     plugins:  {
            title: {
@@ -107,6 +108,13 @@ const options = {
      <div className='container'>         
       <Line data={data} 
             options={options}
+            getelementatevent={(elements, event) => {
+                if (event.type === "click" && elements.length) {
+                console.log(elements[0]?.index,
+                    elements[0]?.datasetIndex);
+                
+                }
+                }}
       />
     
      </div>   

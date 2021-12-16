@@ -10,6 +10,7 @@ require('dotenv').config()
 
 
 const API_key = process.env.REACT_APP_ACCESS_KEY
+var curr_Index = 0;
 
 class App extends React.Component{
 constructor(){
@@ -25,7 +26,8 @@ temp_high: undefined,
 temp_low: undefined,
 description: "",
 date: undefined,
-loading: false,
+c_index: undefined,
+loading: true,
 error:false
 };
 
@@ -79,16 +81,17 @@ getWeather =async(e)=>{
    // console.log(response.data);
   
     this.setState({
+     c_index: 0,
      city:response.city_name,
      country:response.country_code,
-     celsius:response.data[0].temp,
+     celsius:response.data[curr_Index].temp,
      temp_low:this.getLowTemp(response.data),
      temp_high:this.getHighTemp(response.data),
      temp_dates:this.getDates(response.data),
-     description:response.data[0].weather.description,
-     icon:response.data[0].weather.icon,
-     date:response.data[0].datetime,
-     loading: true,
+     description:response.data[curr_Index].weather.description,
+     icon:response.data[curr_Index].weather.icon,
+     date:response.data[curr_Index].datetime,
+     loading: false,
      error:false
     });
   } else{
@@ -106,7 +109,7 @@ return(
           <div className="row">
               <div className="col-12 col-sm-6 col-md-8">{ 
               this.state.city ? 
-              <Graph city={this.state.city} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates}/>
+              <Graph city={this.state.city} c_index={this.state.c_index} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates}/>
               : null
               }
               </div>
