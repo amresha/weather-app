@@ -5,6 +5,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 const Graph  = props => {
+    var temp_Index = 0;
 
     Chart.register(ChartDataLabels);
 
@@ -60,8 +61,11 @@ const options = {
    
     onClick: (e, elements) => {
         
-        console.log(elements[0]?.index);
-
+        //console.log(elements[0]?.index);
+        temp_Index = elements[0]?.index;
+        
+        props.onIndexChange(temp_Index);
+            
     },
 
     plugins:  {
@@ -108,18 +112,19 @@ const options = {
      <div className='container'>         
       <Line data={data} 
             options={options}
-            getelementatevent={(elements, event) => {
-                if (event.type === "click" && elements.length) {
-                console.log(elements[0]?.index,
-                    elements[0]?.datasetIndex);
+            // getelementatevent={(elements, event) => {
+            //     if (event.type === "click" && elements.length) {
+            //     console.log(elements[0]?.index,
+            //         elements[0]?.datasetIndex);
                 
-                }
-                }}
+            //     }
+            //     }}
       />
     
      </div>   
     );
+}
 
-        }
+
 export default Graph;
 

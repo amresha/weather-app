@@ -34,6 +34,26 @@ error:false
 }
 
 
+getIndex(newIndex) {   
+
+if(newIndex > 0){
+        curr_Index = newIndex;
+        // this.c_index = newIndex;
+        // this.setState({ c_index: newIndex });
+        console.log("catch index " + curr_Index)
+        // console.log("New State " + this.c_index)
+
+      }
+      else{
+      curr_Index = 0;
+      console.log("catch else index " + curr_Index)
+
+    }
+
+return curr_Index;
+}
+
+
 getLowTemp(ltemp){
     
       let lowTemps = [];
@@ -66,8 +86,6 @@ getHighTemp(htemp){
     }   
 
 
-
-
 getWeather =async(e)=>{
  
   e.preventDefault(e);
@@ -78,7 +96,7 @@ getWeather =async(e)=>{
   {
     const api_call =await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${API_key}`)
     const response = await api_call.json();
-   // console.log(response.data);
+    console.log("new index" + curr_Index);
   
     this.setState({
      c_index: 0,
@@ -100,7 +118,10 @@ getWeather =async(e)=>{
   
 
 };
+
+
 render(){
+
 return(
   <div className="App">
   <Header />  
@@ -109,7 +130,7 @@ return(
           <div className="row">
               <div className="col-12 col-sm-6 col-md-8">{ 
               this.state.city ? 
-              <Graph city={this.state.city} c_index={this.state.c_index} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates}/>
+              <Graph city={this.state.city} c_index={this.state.c_index} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates} onIndexChange={this.getIndex} />
               : null
               }
               </div>
