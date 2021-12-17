@@ -10,7 +10,7 @@ require('dotenv').config()
 
 
 const API_key = process.env.REACT_APP_ACCESS_KEY
-var curr_Index = 0;
+//var curr_Index = 0;
 
 class App extends React.Component{
 constructor(){
@@ -26,31 +26,24 @@ temp_high: undefined,
 temp_low: undefined,
 description: "",
 date: undefined,
-c_index: undefined,
+c_index: 0,
 loading: true,
 error:false
 };
-
+this.getIndex = this.getIndex.bind(this);
 }
 
 
 getIndex(newIndex) {   
 
 if(newIndex > 0){
-        curr_Index = newIndex;
-        // this.c_index = newIndex;
-        // this.setState({ c_index: newIndex });
-        console.log("catch index " + curr_Index)
-        // console.log("New State " + this.c_index)
-
+        //curr_Index = newIndex;
+        this.setState({ c_index: newIndex });
+        console.log("display new index " + this.state.c_index)
+  
       }
-      else{
-      curr_Index = 0;
-      console.log("catch else index " + curr_Index)
-
-    }
-
-return curr_Index;
+      
+return this.state.c_index;
 }
 
 
@@ -90,25 +83,28 @@ getWeather =async(e)=>{
  
   e.preventDefault(e);
 
+  this.setState({
+    loading: true,
+  });  
+
+  
   const city=e.target.elements.city.value;
 
   if(city)
   {
     const api_call =await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${API_key}`)
     const response = await api_call.json();
-    console.log("new index" + curr_Index);
-  
+   
     this.setState({
-     c_index: 0,
      city:response.city_name,
      country:response.country_code,
-     celsius:response.data[curr_Index].temp,
+     celsius:response.data[this.state.c_index].temp,
      temp_low:this.getLowTemp(response.data),
      temp_high:this.getHighTemp(response.data),
      temp_dates:this.getDates(response.data),
-     description:response.data[curr_Index].weather.description,
-     icon:response.data[curr_Index].weather.icon,
-     date:response.data[curr_Index].datetime,
+     description:response.data[this.state.c_index].weather.description,
+     icon:response.data[this.state.c_index].weather.icon,
+     date:response.data[this.state.c_index].datetime,
      loading: false,
      error:false
     });
@@ -130,7 +126,7 @@ return(
           <div className="row">
               <div className="col-12 col-sm-6 col-md-8">{ 
               this.state.city ? 
-              <Graph city={this.state.city} c_index={this.state.c_index} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates} onIndexChange={this.getIndex} />
+              <Graph city={this.state.city} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates} onIndexChange={this.getIndex} />
               : null
               }
               </div>

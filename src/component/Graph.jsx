@@ -63,7 +63,7 @@ const options = {
         
         //console.log(elements[0]?.index);
         temp_Index = elements[0]?.index;
-        
+            
         props.onIndexChange(temp_Index);
             
     },
