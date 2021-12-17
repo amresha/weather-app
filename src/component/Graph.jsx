@@ -63,8 +63,9 @@ const options = {
         
         //console.log(elements[0]?.index);
         temp_Index = elements[0]?.index;
-            
-        props.onIndexChange(temp_Index);
+        
+        props.onIndexChange(temp_Index)
+//        console.log(temp_Index);
             
     },
 
@@ -112,19 +113,11 @@ const options = {
      <div className='container'>         
       <Line data={data} 
             options={options}
-            // getelementatevent={(elements, event) => {
-            //     if (event.type === "click" && elements.length) {
-            //     console.log(elements[0]?.index,
-            //         elements[0]?.datasetIndex);
-                
-            //     }
-            //     }}
       />
     
      </div>   
     );
-}
 
-
+        }
 export default Graph;
 
