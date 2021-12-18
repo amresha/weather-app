@@ -52,7 +52,7 @@ return this.state.c_index;
 componentDidUpdate(prevProps, prevState) {
   if (prevState.c_index !== this.state.c_index) {
     
-    this.getWeather()
+    this.getGraphWeather()
   }
 }
 
@@ -88,13 +88,44 @@ getHighTemp(htemp){
       return dateTemp;
     }   
 
+    getGraphWeather =async()=>{
+
+      this.setState({
+        loading: true
+      });  
+              const api_call =await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${temp_city}&key=${API_key}`)
+              const response = await api_call.json();
+              city = null;
+    
+            if(temp_city){
+           
+              this.setState({
+              card_city:response.city_name,
+              country:response.country_code,
+              celsius:response.data[this.state.c_index].temp,
+              temp_low:this.getLowTemp(response.data),
+              temp_high:this.getHighTemp(response.data),
+              temp_dates:this.getDates(response.data),
+              description:response.data[this.state.c_index].weather.description,
+              icon:response.data[this.state.c_index].weather.icon,
+              date:response.data[this.state.c_index].datetime,
+              loading: false,
+              error:false
+              });
+            }
+              else{
+                this.setState({error:true});
+              }
+            
+   }
+
 
 getWeather =async(e)=>{
 
 
-  if(city !== temp_city && city !== null){
 
     city=e.target.elements.city.value;
+    console.log('second temp_city ' + temp_city + 'city ' + city)
   
   this.setState({
     loading: true,
@@ -122,40 +153,14 @@ getWeather =async(e)=>{
           error:false
           });
         } else{
-          this.setState({error:true});
+          
+          this.setState({
+            card_city: undefined,
+            error:true
+            });
+
         }
   
-}
-      else if (temp_city) {
-        
-        city=temp_city;
-        console.log('second temp_city ' + temp_city + 'city ' + city)
-        
-        this.setState({
-          loading: true,
-        });  
-
-        const api_call =await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${temp_city}&key=${API_key}`)
-        const response = await api_call.json();
-        
-        this.setState({
-          card_city:response.city_name,
-          country:response.country_code,
-          celsius:response.data[this.state.c_index].temp,
-          temp_low:this.getLowTemp(response.data),
-          temp_high:this.getHighTemp(response.data),
-          temp_dates:this.getDates(response.data),
-          description:response.data[this.state.c_index].weather.description,
-          icon:response.data[this.state.c_index].weather.icon,
-          date:response.data[this.state.c_index].datetime,
-          loading: false,
-          error:false
-        });
-        
-      } 
-  else{
-        this.setState({error:true});
-      }
 };
 
 
@@ -169,7 +174,7 @@ return(
           <div className="row">
               <div className="col-12 col-sm-6 col-md-8">{ 
               this.state.card_city ? 
-              <Graph loadweather={this.getWeather} error={this.state.error} city={this.state.city} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates} onIndexChange={this.getIndex} />
+              <Graph loadweather={this.getWeather} error={this.state.error} city={this.state.card_city} temp_low={this.state.temp_low} temp_high={this.state.temp_high} temp_dates={this.state.temp_dates} onIndexChange={this.getIndex} />
               : null
               }
               </div>
